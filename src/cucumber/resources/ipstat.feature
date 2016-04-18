@@ -3,7 +3,7 @@ Feature: ip stat features of calculator-service
     Given calculator-service app is started
     And a mongodb is started
 
-  @test_calculator_add
+  @test_calculator_stat
   Scenario: entry point of stat works
     Given that I create a request on stat
     When I submit the request
