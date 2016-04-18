@@ -10,6 +10,7 @@
 // Apply the java plugin to add support for Java
 plugins {
     id 'java'
+    id 'com.github.samueltbrown.cucumber' version '0.9'
     id 'idea'
     id 'jacoco'
     id "com.github.kt3k.coveralls" version "2.6.3"
@@ -28,6 +29,14 @@ repositories {
 dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.18'
+    compile 'org.apache.logging.log4j:log4j-core:2.1'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.1'
+
+    compile 'com.jayway.restassured:rest-assured:2.9.0'
+    compile 'info.cukes:cucumber-java:1.2.4'
+    compile 'info.cukes:cucumber-junit:1.2.4'
+
+    compile "org.projectlombok:lombok:1.16.8"
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the
@@ -46,6 +55,11 @@ jacocoTestReport {
         html.enabled = true
         html.destination "${buildDir}/jacocoHtml"
     }
+}
+
+cucumber {
+    formats = ['pretty','junit:build/cucumber.xml']
+    tags = ['@test_calculator_add']
 }
 
 group = 'com.github.dev-tool-index'
