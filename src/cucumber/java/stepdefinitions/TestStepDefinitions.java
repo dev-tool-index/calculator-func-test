@@ -18,6 +18,8 @@ import org.hamcrest.Matchers;
  */
 @Log4j2 public class TestStepDefinitions {
 
+    private static final String SERVLET_PATH = "/calculator-server";
+
     private int arg1_value;
     private int arg2_value;
 
@@ -33,7 +35,7 @@ import org.hamcrest.Matchers;
         throws Throwable {
         String base_uri = Params.HTTP_PROTOCOL + Params.CALCULATOR_SERVICE_IP;
         RestAssured.given().log().path().baseUri(base_uri).port(Params.CALCULATOR_SERVICE_PORT).
-            get("/health").then().log().ifError().assertThat().statusCode(HttpStatus.SC_OK)
+            get(SERVLET_PATH + "/health").then().log().ifError().assertThat().statusCode(HttpStatus.SC_OK)
             .contentType(ContentType.JSON).body("status", Matchers.is("UP"))
             .body("mongo.status", Matchers.is("UP"));
     }
@@ -61,7 +63,7 @@ import org.hamcrest.Matchers;
         // http://192.168.31.223:8090/calc/add?arg1=3&arg2=2
         RestAssured.given().log().path().contentType(ContentType.JSON).baseUri(base_uri)
             .port(Params.CALCULATOR_SERVICE_PORT).queryParam("arg1", arg1_value)
-            .queryParam("arg2", arg2_value).get("/calc/add").then().log().ifError().assertThat()
+            .queryParam("arg2", arg2_value).get(SERVLET_PATH + "/calc/add").then().log().ifError().assertThat()
             .statusCode(HttpStatus.SC_OK).contentType(ContentType.JSON).
                 body("result", Matchers.equalTo(arg1));
     }
