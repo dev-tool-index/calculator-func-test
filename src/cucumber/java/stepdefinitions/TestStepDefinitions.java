@@ -18,7 +18,7 @@ import org.hamcrest.Matchers;
  */
 @Log4j2 public class TestStepDefinitions {
 
-    private static final String SERVLET_PATH = "/calculator-server";
+    private static final String SERVLET_PATH = "/calculator-service";
 
     private int arg1_value;
     private int arg2_value;
