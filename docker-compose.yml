@@ -6,7 +6,7 @@ mongodb:
     - "27017:27017"
     - "28017:28017"
 calculator-service:
-  image: devtoolindex/calculator-service:3.1
+  image: devtoolindex/calculator-service:3.3
   ports:
     - "8090:8080"
   links:
